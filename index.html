@@ -6,45 +6,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#0a0a0a;
+    :root{
+      --bg:#000;
       --gold:#ffd700;
-      --glow:0 0 8px var(--gold), 0 0 20px var(--gold);
-      --font:'Tajawal', sans-serif;
+      --glow:0 0 8px var(--gold),0 0 20px var(--gold);
+      --font:'Tajawal',sans-serif;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:var(--font);
-      background:var(--bg);
-      color:#fff;
-      overflow-x:hidden;
-      scroll-behavior:smooth;
-    }
-    /* خلفية جسيمات */
-    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
-    /* شعار + أزرار */
-    .hero{
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
-    .hero h1{
-      font-size:3rem;
+    body{font-family:var(--font);background:var(--bg);color:#fff;overflow-x:hidden;scroll-behavior:smooth}
+    #particles{position:fixed;inset:0;z-index:-1}
+
+    /* شعار Spotty متحرك + وميض خفيف */
+    .spotty-title{
+      margin-top:5vh;
+      font-size:2.8rem;
       font-weight:900;
       color:var(--gold);
+      text-align:center;
       text-shadow:var(--glow);
-      margin-bottom:1.5rem;
+      animation:pulse 2.5s infinite ease-in-out, flicker 3s infinite;
     }
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+    @keyframes flicker{
+      0%,100%{opacity:1}
+      20%{opacity:.95}
+      40%{opacity:1}
+      60%{opacity:.9}
+      80%{opacity:1}
+    }
+
+    /* زر جلتش التواصل */
+    .social-btn{
+      position:fixed;
+      top:1rem;
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(255,215,0,.15);
+      border:1px solid var(--gold);
+      border-radius:20px;
+      padding:.4rem 1.2rem;
+      font-size:.9rem;
+      color:var(--gold);
+      cursor:pointer;
+      transition:.4s;
+      z-index:100;
+    }
+    .social-btn:hover{background:var(--gold);color:#000}
+
+    /* قائمة تواصل متحركة */
+    .social-menu{
+      position:fixed;
+      top:-100px; /* مخفية فوق */
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:1rem;
+      transition:.6s cubic-bezier(.68,-.55,.27,1.55);
+      z-index:101;
+    }
+    .social-menu.show{top:4.2rem}
+    .social-menu a{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      border:1px solid var(--gold);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:var(--gold);
+      text-decoration:none;
+      transition:.3s;
+    }
+    .social-menu a:hover{background:var(--gold);color:#000}
+
+    /* خانات المتاجر */
     .stores{
-      padding:2rem 1rem;
+      margin-top:12vh;
+      padding:0 1rem 4rem;
       display:flex;
       flex-direction:column;
-      gap:1rem;
+      gap:1.2rem;
       max-width:480px;
-      margin:auto;
+      margin-left:auto;
+      margin-right:auto;
     }
     .store{
       display:flex;
@@ -59,46 +104,28 @@
     .store:hover{background:var(--gold);color:#000}
     .store img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold))}
     .store span{font-size:1.3rem;font-weight:700}
-    /* شريط تواصل ينزلق */
-    .contact-bar{
+
+    /* سهم يشير للأسفل */
+    .arrow{
       position:fixed;
-      bottom:-80px;
-      left:0;
-      width:100%;
-      background:rgba(0,0,0,.8);
-      border-top:1px solid var(--gold);
-      backdrop-filter:blur(8px);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:.8rem 1rem;
-      transition:.6s cubic-bezier(.68,-.55,.27,1.55);
-      z-index:100;
+      bottom:1.5rem;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:2rem;
+      animation:bounce 2s infinite;
     }
-    .contact-bar.show{bottom:0}
-    .contact-icons{display:flex;gap:1rem}
-    .contact-icons a{
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      border:1px solid var(--gold);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+
+    /* حقوق النشر أسفل */
+    footer{
+      position:fixed;
+      bottom:.5rem;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:.85rem;
       color:var(--gold);
-      text-decoration:none;
-      font-weight:700;
-      transition:.3s;
+      text-shadow:0 0 4px var(--gold);
     }
-    .contact-icons a:hover{background:var(--gold);color:#000}
-    .rights{
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      font-size:.9rem;
-      color:var(--gold);
-    }
-    .rights img.logo-small{height:30px;width:auto}
   </style>
 </head>
 
@@ -106,43 +133,39 @@
   <!-- خلفية جسيمات -->
   <canvas id="particles"></canvas>
 
-  <!-- قسم البطل -->
-  <section class="hero">
-    <h1>Spotty</h1>
-  </section>
+  <!-- شعار Spotty -->
+  <h1 class="spotty-title">Spotty</h1>
+
+  <!-- زر التواصل + قائمة متحركة -->
+  <button class="social-btn" onclick="toggleSocial()">تواصل معنا</button>
+  <div class="social-menu" id="socialMenu">
+    <a href="https://twitter.com/yousef_scott" target="_blank" title="Twitter">T</a>
+    <a href="https://t.me/ispott" target="_blank" title="Telegram">TG</a>
+  </div>
 
   <!-- خانات المتاجر -->
-  <section class="stores">
+  <section class="stores" id="stores">
     <a class="store" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
       <img src="cydia.png" alt="Cydia"><span>Cydia</span>
     </a>
-
     <a class="store" href="sileo://source/https://espotty.github.io">
       <img src="sileo.png" alt="Sileo"><span>Sileo</span>
     </a>
-
     <a class="store" href="saily://source/https://espotty.github.io">
       <img src="saily.png" alt="Saily"><span>Saily</span>
     </a>
-
     <a class="store" href="zbra://sources/add/https://espotty.github.io">
       <img src="zebra.png" alt="Zebra"><span>Zebra</span>
     </a>
   </section>
 
-  <!-- شريط التواصل المتحرك -->
-  <div class="contact-bar" id="contactBar">
-    <div class="rights">
-      © All rights reserved – Spotty Repo
-      <img class="logo-small" src="logo-small.png" alt="Logo">
-    </div>
-    <div class="contact-icons">
-      <a href="https://twitter.com/yousef_scott" title="Twitter">T</a>
-      <a href="https://t.me/ispott" title="Telegram">TG</a>
-    </div>
-  </div>
+  <!-- سهم يشير للأسفل -->
+  <div class="arrow">↓</div>
 
-  <!-- سكربت الجسيمات + إظهار شريط التواصل -->
+  <!-- حقوق النشر -->
+  <footer>© All rights reserved – Spotty Repo</footer>
+
+  <!-- سكربت الجسيمات + تبديل القائمة -->
   <script>
     /* خلفية جسيمات */
     const canvas=document.getElementById('particles');
@@ -150,7 +173,8 @@
     let W,H;
     function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
     resize();window.onresize=resize;
-    const particles=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,dx:Math.random()*2-1,dy:Math.random()*2-1,color:`rgba(255,215,0,${Math.random()*.5+.2})`}));
+    const particles=[];
+    for(let i=0;i<150;i++)particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,dx:Math.random()*2-1,dy:Math.random()*2-1,color:`rgba(255,215,0,${Math.random()*.6+.2})`});
     function draw(){
       ctx.clearRect(0,0,W,H);
       particles.forEach(p=>{
@@ -163,15 +187,10 @@
     }
     draw();
 
-    /* عرض شريط التواصل عند السحب للأسفل أو عند التمرير */
-    const contactBar=document.getElementById('contactBar');
-    let lastY=window.scrollY;
-    window.addEventListener('scroll',()=>{
-      if(window.scrollY>lastY) contactBar.classList.add('show');
-      else contactBar.classList.remove('show');
-      lastY=window.scrollY;
-    });
-    window.addEventListener('touchmove',()=>contactBar.classList.add('show'));
+    /* تبديل قائمة التواصل */
+    function toggleSocial(){
+      document.getElementById('socialMenu').classList.toggle('show');
+    }
   </script>
 </body>
 </html>
