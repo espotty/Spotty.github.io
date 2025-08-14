@@ -4,10 +4,6 @@
   <meta charset="utf-8" />
   <title>Spotty – أدوات iOS المميزة</title>
 
-  <!-- أيقونات متعددة -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="spott-logo.svg" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 
@@ -30,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 2rem;
+      padding: 1rem;
       min-height: 100vh;
     }
 
@@ -39,18 +35,34 @@
       border-radius: var(--radius);
       max-width: 420px;
       width: 100%;
-      box-shadow: 0 8px 24px rgba(0, 245, 212, .18);
+      box-shadow: 0 8px 24px rgba(0,245,212,.18);
       overflow: hidden;
+      position: relative;
+    }
+
+    /* زر اللغة */
+    #langBtn {
+      position: absolute;
+      top: .7rem;
+      left: .7rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      font-size: .75rem;
+      cursor: pointer;
+      z-index: 10;
     }
 
     .header {
       background: #1e1e1e;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem 1.5rem;
       text-align: center;
     }
 
     .header img {
-      width: 100px;
+      width: 90px;
       margin-bottom: .5rem;
     }
 
@@ -106,10 +118,10 @@
       color: var(--bg);
     }
 
-    .btn img {
+    .btn svg {
       width: 28px;
       height: 28px;
-      object-fit: contain;
+      fill: var(--accent);
     }
 
     footer {
@@ -118,60 +130,113 @@
       opacity: .5;
       padding: 1rem;
     }
+
+    /* RTL / LTR */
+    [dir="ltr"] {
+      direction: ltr;
+    }
   </style>
 </head>
 
 <body>
   <div class="card">
+    <!-- زر تغيير اللغة -->
+    <button id="langBtn" onclick="toggleLang()">English</button>
+
     <header class="header">
-      <img src="spott-logo.svg" alt="Spotty" />
-      <h1>Spotty</h1>
+      <svg viewBox="0 0 100 100" width="90" height="90" fill="none">
+        <circle cx="50" cy="50" r="48" stroke="#00f5d4" stroke-width="8"/>
+        <text x="50" y="55" text-anchor="middle" font-size="40" fill="#00f5d4">S</text>
+      </svg>
+      <h1 id="title">Spotty</h1>
     </header>
 
     <div class="body">
       <section class="section">
-        <h2>أضف السورس إلى متجرك المفضل</h2>
-        <p>اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.</p>
+        <h2 id="subTitle">أضف السورس إلى متجرك المفضل</h2>
+        <p id="desc">اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.</p>
       </section>
 
       <div class="btn-grid">
         <!-- Cydia -->
         <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Cydia">
-          <span>Cydia – اضغط هنا</span>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
+          <span id="cydia">Cydia</span>
         </a>
 
         <!-- Sileo -->
         <a class="btn" href="sileo://source/https://espotty.github.io">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Sileo">
-          <span>Sileo – اضغط هنا</span>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
+          <span id="sileo">Sileo</span>
         </a>
 
         <!-- Saily -->
         <a class="btn" href="saily://source/https://espotty.github.io">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Saily">
-          <span>Saily – اضغط هنا</span>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
+          <span id="saily">Saily</span>
         </a>
 
         <!-- Zebra -->
         <a class="btn" href="zbra://sources/add/https://espotty.github.io">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Zebra">
-          <span>Zebra – اضغط هنا</span>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
+          <span id="zebra">Zebra</span>
         </a>
       </div>
 
       <section class="section">
-        <h2>الدعم الفني</h2>
+        <h2 id="support">الدعم الفني</h2>
         <a class="btn" href="mailto:usfspott@gmail.com">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300f5d4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/%3E%3C/svg%3E" alt="Email">
-          <span>usfspott@gmail.com</span>
+          <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span id="mail">usfspott@gmail.com</span>
         </a>
       </section>
     </div>
 
-    <footer>
+    <footer id="footer">
       &copy; 2025 Spotty Team – جميع الحقوق محفوظة.
     </footer>
   </div>
+
+  <!-- سكربت تبديل اللغة -->
+  <script>
+    const dict = {
+      ar: {
+        title: "Spotty",
+        subTitle: "أضف السورس إلى متجرك المفضل",
+        desc: "اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.",
+        cydia: "Cydia",
+        sileo: "Sileo",
+        saily: "Saily",
+        zebra: "Zebra",
+        support: "الدعم الفني",
+        mail: "usfspott@gmail.com",
+        footer: "جميع الحقوق محفوظة."
+      },
+      en: {
+        title: "Spotty",
+        subTitle: "Add the repo to your favourite store",
+        desc: "Choose your package manager and Spotty will be added automatically.",
+        cydia: "Cydia",
+        sileo: "Sileo",
+        saily: "Saily",
+        zebra: "Zebra",
+        support: "Support",
+        mail: "usfspott@gmail.com",
+        footer: "All rights reserved."
+      }
+    };
+
+    let current = "ar";
+    function toggleLang() {
+      current = current === "ar" ? "en" : "ar";
+      document.documentElement.lang = current;
+      document.documentElement.dir = current === "ar" ? "rtl" : "ltr";
+      document.getElementById("langBtn").textContent = current === "ar" ? "English" : "العربية";
+      Object.keys(dict[current]).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = dict[current][id];
+      });
+    }
+  </script>
 </body>
 </html>
