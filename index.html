@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Spotty</title>
+  <title>Spotty – أدوات iOS المميزة</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -13,10 +13,10 @@
       --font:'Tajawal',sans-serif;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    html,body{min-height:100vh;font-family:var(--font);background:var(--bg);color:#fff;overflow-x:hidden}
+    html,body{min-height:100vh;font-family:var(--font);background:var(--bg);color:#fff;overflow-x:hidden;scroll-behavior:smooth}
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
 
-    /* شعار Spotty */
+    /* شعار Spotty مع Glitch خفيف */
     .hero{
       display:flex;
       flex-direction:column;
@@ -25,13 +25,22 @@
       text-align:center;
       padding:10vh 1rem 5vh;
     }
-    .hero h1{
-      font-size:3rem;
+    .spotty-glitch{
+      font-size:3.5rem;
       font-weight:900;
       color:var(--gold);
       text-shadow:var(--glow);
-      margin-bottom:2rem;
+      position:relative;
     }
+    .spotty-glitch::after{
+      content:'Spotty';
+      position:absolute;
+      top:0;left:.5px;
+      color:#ff00ff;
+      clip-path:inset(0 0 65% 0);
+      animation:glitch .8s infinite steps(2,end);
+    }
+    @keyframes glitch{0%{transform:translateX(-2px)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
 
     /* خانات المتاجر */
     .stores{
@@ -56,6 +65,23 @@
     .store img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold))}
     .store span{font-size:1.3rem;font-weight:700}
 
+    /* زر Contact Me مُضاء */
+    .contact-btn{
+      display:block;
+      width:max-content;
+      margin:3vh auto 4vh;
+      padding:.7rem 1.5rem;
+      background:transparent;
+      border:1px solid var(--gold);
+      color:var(--gold);
+      font-size:1.1rem;
+      border-radius:25px;
+      text-decoration:none;
+      animation:glow 2s infinite alternate;
+    }
+    @keyframes glow{from{box-shadow:0 0 5px var(--gold)}to{box-shadow:0 0 15px var(--gold),0 0 25px var(--gold)}}
+    .contact-btn:hover{background:var(--gold);color:#000}
+
     /* شريط تواصل ثابت أسفل */
     .contact-bar{
       position:fixed;
@@ -71,21 +97,11 @@
       padding:.8rem 1rem;
       z-index:100;
     }
-    .rights{
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      font-size:.9rem;
-      color:var(--gold);
-    }
+    .rights{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--gold)}
     .rights img.logo-small{height:30px;width:auto}
-    .contact-icons{
-      display:flex;
-      gap:1rem;
-    }
+    .contact-icons{display:flex;gap:1rem}
     .contact-icons a{
-      width:36px;
-      height:36px;
+      width:36px;height:36px;
       border-radius:50%;
       border:1px solid var(--gold);
       display:flex;
@@ -106,7 +122,7 @@
 
   <!-- قسم البطل -->
   <section class="hero">
-    <h1>Spotty</h1>
+    <h1 class="spotty-glitch">Spotty</h1>
   </section>
 
   <!-- خانات المتاجر -->
@@ -128,6 +144,9 @@
     </a>
   </section>
 
+  <!-- زر Contact Me -->
+  <a class="contact-btn" href="https://t.me/ispott" target="_blank">Contact Me</a>
+
   <!-- شريط تواصل ثابت أسفل -->
   <div class="contact-bar">
     <div class="rights">
@@ -144,8 +163,7 @@
   <script>
     const canvas=document.getElementById('particles');
     const ctx=canvas.getContext('2d');
-    let W,H;
-    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+    let W,H;function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
     resize();window.onresize=resize;
     const particles=Array.from({length:120},()=>({
       x:Math.random()*W,
