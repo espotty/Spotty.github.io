@@ -2,232 +2,190 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <title>Spotty – أدوات iOS المميزة</title>
-
+  <title>Spotty 2090</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #0a0a0a;
-      --card: #121212;
-      --accent: #00f5d4;
-      --text: #ffffff;
-      --radius: 12px;
+      --gold: #ffd700;
+      --glow: 0 0 8px var(--gold), 0 0 20px var(--gold);
       --font: 'Tajawal', sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 1rem;
-      min-height: 100vh;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--font);
+      background:var(--bg);
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      max-width: 420px;
-      width: 100%;
-      box-shadow: 0 8px 24px rgba(0,245,212,.18);
-      overflow: hidden;
-      position: relative;
+    /* خلفية جسيمات متحركة */
+    #particles{
+      position:fixed;
+      inset:0;
+      z-index:-1;
     }
 
-    /* زر اللغة */
-    #langBtn {
-      position: absolute;
-      top: .7rem;
-      left: .7rem;
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: .3rem .6rem;
-      border-radius: 6px;
-      font-size: .75rem;
-      cursor: pointer;
-      z-index: 10;
+    .card{
+      position:relative;
+      background:rgba(0,0,0,.75);
+      backdrop-filter:blur(8px);
+      border:1px solid var(--gold);
+      border-radius:20px;
+      max-width:440px;
+      width:100%;
+      box-shadow:var(--glow);
+      padding:2rem 1.5rem;
+      animation: pulse 4s infinite ease-in-out;
     }
 
-    .header {
-      background: #1e1e1e;
-      padding: 2rem 1.5rem 1.5rem;
-      text-align: center;
+    @keyframes pulse{
+      0%  {box-shadow:0 0 8px var(--gold);}
+      50% {box-shadow:0 0 20px var(--gold), 0 0 40px var(--gold);}
+      100%{box-shadow:0 0 8px var(--gold);}
     }
 
-    .header img {
-      width: 90px;
-      margin-bottom: .5rem;
+    .logo{
+      width:120px;
+      margin:0 auto 1rem;
+      display:block;
+      filter:drop-shadow(var(--glow));
     }
 
-    .header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--accent);
+    h1{
+      text-align:center;
+      font-size:2.2rem;
+      font-weight:700;
+      color:var(--gold);
+      text-shadow:var(--glow);
+      margin-bottom:1.5rem;
     }
 
-    .body {
-      padding: 1.2rem 1.4rem 2rem;
+    #langBtn{
+      position:absolute;
+      top:.8rem;
+      left:.8rem;
+      background:transparent;
+      color:var(--gold);
+      border:1px solid var(--gold);
+      border-radius:8px;
+      padding:.3rem .6rem;
+      font-size:.8rem;
+      cursor:pointer;
+      transition:.3s;
+    }
+    #langBtn:hover{background:var(--gold);color:var(--bg);}
+
+    .btn-grid{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
     }
 
-    .section {
-      margin-bottom: 1.2rem;
+    .btn{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+      background:rgba(255,215,0,.08);
+      border:1px solid var(--gold);
+      border-radius:16px;
+      padding:1rem 1.2rem;
+      color:#fff;
+      text-decoration:none;
+      transition:.4s;
     }
 
-    .section h2 {
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: .5rem;
-      color: var(--accent);
+    .btn img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold));}
+    .btn:hover{
+      background:var(--gold);
+      color:var(--bg);
+      box-shadow:var(--glow);
     }
 
-    .section p {
-      font-size: .95rem;
-      opacity: .8;
-      line-height: 1.5;
-    }
-
-    .btn-grid {
-      display: flex;
-      flex-direction: column;
-      gap: .7rem;
-    }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      background: #1e1e1e;
-      border: none;
-      border-radius: var(--radius);
-      color: var(--text);
-      text-decoration: none;
-      padding: .9rem 1rem;
-      font-weight: 500;
-      transition: background .25s;
-    }
-
-    .btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .btn svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--accent);
-    }
-
-    footer {
-      text-align: center;
-      font-size: .75rem;
-      opacity: .5;
-      padding: 1rem;
-    }
-
-    /* RTL / LTR */
-    [dir="ltr"] {
-      direction: ltr;
+    footer{
+      text-align:center;
+      color:var(--gold);
+      font-size:.9rem;
+      margin-top:1.5rem;
     }
   </style>
 </head>
 
 <body>
+  <!-- خلفية جسيمات -->
+  <canvas id="particles"></canvas>
+
   <div class="card">
-    <!-- زر تغيير اللغة -->
     <button id="langBtn" onclick="toggleLang()">English</button>
 
-    <header class="header">
-      <svg viewBox="0 0 100 100" width="90" height="90" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="#00f5d4" stroke-width="8"/>
-        <text x="50" y="55" text-anchor="middle" font-size="40" fill="#00f5d4">S</text>
-      </svg>
-      <h1 id="title">Spotty</h1>
-    </header>
+    <img class="logo" src="logo.png" alt="Spotty">
+    <h1 id="title">Spotty 2090</h1>
 
-    <div class="body">
-      <section class="section">
-        <h2 id="subTitle">أضف السورس إلى متجرك المفضل</h2>
-        <p id="desc">اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.</p>
-      </section>
+    <div class="btn-grid">
+      <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
+        <img src="cydia.png" alt="Cydia"><span id="cydia">Cydia</span>
+      </a>
 
-      <div class="btn-grid">
-        <!-- Cydia -->
-        <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
-          <span id="cydia">Cydia</span>
-        </a>
+      <a class="btn" href="sileo://source/https://espotty.github.io">
+        <img src="sileo.png" alt="Sileo"><span id="sileo">Sileo</span>
+      </a>
 
-        <!-- Sileo -->
-        <a class="btn" href="sileo://source/https://espotty.github.io">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
-          <span id="sileo">Sileo</span>
-        </a>
+      <a class="btn" href="saily://source/https://espotty.github.io">
+        <img src="saily.png" alt="Saily"><span id="saily">Saily</span>
+      </a>
 
-        <!-- Saily -->
-        <a class="btn" href="saily://source/https://espotty.github.io">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
-          <span id="saily">Saily</span>
-        </a>
-
-        <!-- Zebra -->
-        <a class="btn" href="zbra://sources/add/https://espotty.github.io">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-2-4H9v-2h4v2z"/></svg>
-          <span id="zebra">Zebra</span>
-        </a>
-      </div>
-
-      <section class="section">
-        <h2 id="support">الدعم الفني</h2>
-        <a class="btn" href="mailto:usfspott@gmail.com">
-          <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span id="mail">usfspott@gmail.com</span>
-        </a>
-      </section>
+      <a class="btn" href="zbra://sources/add/https://espotty.github.io">
+        <img src="zebra.png" alt="Zebra"><span id="zebra">Zebra</span>
+      </a>
     </div>
 
-    <footer id="footer">
-      &copy; 2025 Spotty Team – جميع الحقوق محفوظة.
-    </footer>
+    <footer id="footer">© 2090 Spotty</footer>
   </div>
 
-  <!-- سكربت تبديل اللغة -->
+  <!-- سكربت جسيمات -->
   <script>
-    const dict = {
-      ar: {
-        title: "Spotty",
-        subTitle: "أضف السورس إلى متجرك المفضل",
-        desc: "اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.",
-        cydia: "Cydia",
-        sileo: "Sileo",
-        saily: "Saily",
-        zebra: "Zebra",
-        support: "الدعم الفني",
-        mail: "usfspott@gmail.com",
-        footer: "جميع الحقوق محفوظة."
-      },
-      en: {
-        title: "Spotty",
-        subTitle: "Add the repo to your favourite store",
-        desc: "Choose your package manager and Spotty will be added automatically.",
-        cydia: "Cydia",
-        sileo: "Sileo",
-        saily: "Saily",
-        zebra: "Zebra",
-        support: "Support",
-        mail: "usfspott@gmail.com",
-        footer: "All rights reserved."
-      }
-    };
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+    resize(); window.onresize = resize;
 
+    const particles = Array.from({length: 80}, () => ({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*2+1,
+      d: Math.random()*5,
+      color: 'rgba(255,215,0,'+(Math.random()*.4+.2)+')'
+    }));
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += p.d;
+        if(p.y > H) p.y = 0;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // تبديل اللغة
+    const dict = {
+      ar: {title:"Spotty 2090", cydia:"Cydia", sileo:"Sileo", saily:"Saily", zebra:"Zebra", footer:"© 2090 Spotty"},
+      en: {title:"Spotty 2090", cydia:"Cydia", sileo:"Sileo", saily:"Saily", zebra:"Zebra", footer:"© 2090 Spotty"}
+    };
     let current = "ar";
-    function toggleLang() {
+    function toggleLang(){
       current = current === "ar" ? "en" : "ar";
       document.documentElement.lang = current;
       document.documentElement.dir = current === "ar" ? "rtl" : "ltr";
