@@ -2,25 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <title>Spotty – أدوات iOS السريعة والمميزة</title>
+  <title>Spotty – أدوات iOS المميزة</title>
 
-  <!-- Icons -->
-  <link rel="icon" type="image/svg+xml" href="spott-icon.svg" />
+  <!-- أيقونات متعددة -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="spott-logo.svg" />
 
-  <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Google Font: Tajawal (Arabic + Latin) -->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #0a0a0a;
+      --bg: #0a0a0a;
+      --card: #121212;
       --accent: #00f5d4;
       --text: #ffffff;
-      --surface: #121212;
-      --surface-2: #1e1e1e;
       --radius: 12px;
       --font: 'Tajawal', sans-serif;
     }
@@ -29,33 +25,32 @@
 
     body {
       font-family: var(--font);
-      background: var(--primary);
+      background: var(--bg);
       color: var(--text);
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      align-items: flex-start;
       padding: 2rem;
+      min-height: 100vh;
     }
 
     .card {
-      background: var(--surface);
+      background: var(--card);
       border-radius: var(--radius);
       max-width: 420px;
       width: 100%;
-      box-shadow: 0 8px 24px rgba(0,245,212,.18);
+      box-shadow: 0 8px 24px rgba(0, 245, 212, .18);
       overflow: hidden;
     }
 
     .header {
-      background: var(--surface-2);
+      background: #1e1e1e;
       padding: 1.5rem;
       text-align: center;
     }
 
     .header img {
-      height: 48px;
-      width: auto;
+      width: 100px;
       margin-bottom: .5rem;
     }
 
@@ -86,24 +81,29 @@
       line-height: 1.5;
     }
 
+    .btn-grid {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+
     .btn {
       display: flex;
       align-items: center;
       gap: .6rem;
-      background: var(--surface-2);
+      background: #1e1e1e;
       border: none;
       border-radius: var(--radius);
       color: var(--text);
       text-decoration: none;
       padding: .9rem 1rem;
-      font: inherit;
       font-weight: 500;
       transition: background .25s;
     }
 
     .btn:hover {
       background: var(--accent);
-      color: var(--primary);
+      color: var(--bg);
     }
 
     .btn img {
@@ -118,51 +118,53 @@
       opacity: .5;
       padding: 1rem;
     }
-
-    /* Responsive tweaks */
-    @media (max-width: 500px) {
-      body { padding: 1rem; }
-      .header h1 { font-size: 1.4rem; }
-    }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <!-- Header -->
     <header class="header">
-      <img src="spott-logo.svg" alt="Spott Logo" />
-      <h1>Spotty – أدوات iOS المميزة</h1>
+      <img src="spott-logo.svg" alt="Spotty" />
+      <h1>Spotty</h1>
     </header>
 
-    <!-- Body -->
     <div class="body">
       <section class="section">
-        <h2>مرحباً بك في Spotty</h2>
-        <p>مجموعة أدوات خفيفة وآمنة لتحسين تجربتك على iOS. جميع الأدوات مختارة بعناية وتُحدّث باستمرار.</p>
+        <h2>أضف السورس إلى متجرك المفضل</h2>
+        <p>اختر المتجر الذي تستخدمه وسيتم إضافة Spotty تلقائياً.</p>
       </section>
 
-      <section class="section">
-        <h2>إضافة السورس إلى Cydia</h2>
-        <a class="btn" <a href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io/Spotty.github.io/">
-          <img src="CydiaIcon.png" alt="Cydia" />
-          <span>اضغط لإضافة Spotty إلى Cydia</span>
+      <div class="btn-grid">
+        <!-- Cydia -->
+        <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Cydia">
+          <span>Cydia – اضغط هنا</span>
         </a>
-      </section>
+
+        <!-- Sileo -->
+        <a class="btn" href="sileo://source/https://espotty.github.io">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Sileo">
+          <span>Sileo – اضغط هنا</span>
+        </a>
+
+        <!-- Saily -->
+        <a class="btn" href="saily://source/https://espotty.github.io">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Saily">
+          <span>Saily – اضغط هنا</span>
+        </a>
+
+        <!-- Zebra -->
+        <a class="btn" href="zbra://sources/add/https://espotty.github.io">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Zebra">
+          <span>Zebra – اضغط هنا</span>
+        </a>
+      </div>
 
       <section class="section">
         <h2>الدعم الفني</h2>
         <a class="btn" href="mailto:usfspott@gmail.com">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300f5d4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/%3E%3C/svg%3E" alt="Email" />
-          <span>راسلنا على usfspott@gmail.com</span>
-        </a>
-      </section>
-
-      <section class="section">
-        <h2>تواصل معنا</h2>
-        <a class="btn" href="https://twitter.com/yousef_scott">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f5d4' viewBox='0 0 24 24'%3E%3Cpath d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'/%3E%3C/svg%3E" alt="Twitter" />
-          <span>تابعنا على Twitter</span>
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300f5d4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/%3E%3C/svg%3E" alt="Email">
+          <span>usfspott@gmail.com</span>
         </a>
       </section>
     </div>
