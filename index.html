@@ -1,60 +1,175 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-	<title>Qiosz and Malr</title>
-<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <meta charset="utf-8" />
+  <title>Spotty – أدوات iOS السريعة والمميزة</title>
 
-	<link rel="apple-touch-icon" sizes="76x76" href="favicon-32x32.png">
-	
-	<link rel="mask-icon" href="steve-jobs.svg" color="red">
-	
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<base target="_blank"/> 
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="spott-icon.svg" />
+  <link rel="apple-touch-icon" href="spott-logo.svg" />
 
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Google Font: Tajawal (Arabic + Latin) -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --primary: #0a0a0a;
+      --accent: #00f5d4;
+      --text: #ffffff;
+      --surface: #121212;
+      --surface-2: #1e1e1e;
+      --radius: 12px;
+      --font: 'Tajawal', sans-serif;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-<body class="pinstripe nolegacy">
-<panel>
-	
-	<div align="center"> 
-	
-	<block>
-		<p>مرحبا بك في سورس قيس</p>
-</block>
-	
-<block>
-	<p>ادوات خفيفه ومهمة بعضها محذوفة</p>
-	<p>ضيف لا افوتك</p>
-	<p>ادوات اساسية</p>
-	
-</block>
+    body {
+      font-family: var(--font);
+      background: var(--primary);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
 
-<fieldset>
-	<a href="cydia://url/https://cydia.saurik.com/api/share#?source=https://qiosz.github.io/cydia/"><img src="./CydiaIcon.png" class="icon"><div><div><label><p>اضافة السورس للسيديا</p></label><label class="url"><p></p></label></div></div></a>
-</fieldset>
-<block>
-	<p>الــدعم الفني</p>
-</block>
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0,245,212,.18);
+      overflow: hidden;
+    }
 
-<fieldset>
-	<a href="mailto:gernaskaler@yahoo.com"><img src="./opened-email-envelope.png" class="icon"><div><div><label><p>لمراسلتي</p></label></div></div></a>
-</fieldset>
+    .header {
+      background: var(--surface-2);
+      padding: 1.5rem;
+      text-align: center;
+    }
 
-<block>
-<a href="https://twitter.com/Qiosz">Twitter</a>
-</block>
+    .header img {
+      height: 48px;
+      width: auto;
+      margin-bottom: .5rem;
+    }
 
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
 
+    .body {
+      padding: 1.2rem 1.4rem 2rem;
+    }
 
-<footer> &copy; 2014 - 2017 Malr Rdd Inc. 
+    .section {
+      margin-bottom: 1.2rem;
+    }
 
-	 
+    .section h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: .5rem;
+      color: var(--accent);
+    }
 
-	</div>
-	
-</panel>
+    .section p {
+      font-size: .95rem;
+      opacity: .8;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--surface-2);
+      border: none;
+      border-radius: var(--radius);
+      color: var(--text);
+      text-decoration: none;
+      padding: .9rem 1rem;
+      font: inherit;
+      font-weight: 500;
+      transition: background .25s;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    .btn img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    footer {
+      text-align: center;
+      font-size: .75rem;
+      opacity: .5;
+      padding: 1rem;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 500px) {
+      body { padding: 1rem; }
+      .header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <!-- Header -->
+    <header class="header">
+      <img src="spott-logo.svg" alt="Spott Logo" />
+      <h1>Spotty – أدوات iOS المميزة</h1>
+    </header>
+
+    <!-- Body -->
+    <div class="body">
+      <section class="section">
+        <h2>مرحباً بك في Spotty</h2>
+        <p>مجموعة أدوات خفيفة وآمنة لتحسين تجربتك على iOS. جميع الأدوات مختارة بعناية وتُحدّث باستمرار.</p>
+      </section>
+
+      <section class="section">
+        <h2>إضافة السورس إلى Cydia</h2>
+        <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://qiosz.github.io/cydia/">
+          <img src="CydiaIcon.png" alt="Cydia" />
+          <span>اضغط لإضافة Spotty إلى Cydia</span>
+        </a>
+      </section>
+
+      <section class="section">
+        <h2>الدعم الفني</h2>
+        <a class="btn" href="mailto:usfspott@gmail.com">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300f5d4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/%3E%3C/svg%3E" alt="Email" />
+          <span>راسلنا على usfspott@gmail.com</span>
+        </a>
+      </section>
+
+      <section class="section">
+        <h2>تواصل معنا</h2>
+        <a class="btn" href="https://twitter.com/yousef_scott">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f5d4' viewBox='0 0 24 24'%3E%3Cpath d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'/%3E%3C/svg%3E" alt="Twitter" />
+          <span>تابعنا على Twitter</span>
+        </a>
+      </section>
+    </div>
+
+    <footer>
+      &copy; 2025 Spotty Team – جميع الحقوق محفوظة.
+    </footer>
+  </div>
 </body>
 </html>
