@@ -7,83 +7,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#000;
+      --bg:#0a0a0a;
       --gold:#ffd700;
       --glow:0 0 8px var(--gold),0 0 20px var(--gold);
       --font:'Tajawal',sans-serif;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:var(--font);background:var(--bg);color:#fff;overflow-x:hidden;scroll-behavior:smooth}
-    #particles{position:fixed;inset:0;z-index:-1}
+    html,body{
+      font-family:var(--font);
+      background:var(--bg);
+      color:#fff;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      height:200vh; /* صفحة طويلة جداً */
+    }
+    /* خلفية جسيمات */
+    #particles{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+    }
 
-    /* شعار Spotty متحرك + وميض خفيف */
+    /* شعار Spotty */
     .spotty-title{
-      margin-top:5vh;
-      font-size:2.8rem;
+      margin-top:8vh;
+      font-size:3rem;
       font-weight:900;
       color:var(--gold);
       text-align:center;
       text-shadow:var(--glow);
-      animation:pulse 2.5s infinite ease-in-out, flicker 3s infinite;
+      animation:pulse 2.5s infinite ease-in-out;
     }
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-    @keyframes flicker{
-      0%,100%{opacity:1}
-      20%{opacity:.95}
-      40%{opacity:1}
-      60%{opacity:.9}
-      80%{opacity:1}
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.03)}
     }
-
-    /* زر جلتش التواصل */
-    .social-btn{
-      position:fixed;
-      top:1rem;
-      left:50%;
-      transform:translateX(-50%);
-      background:rgba(255,215,0,.15);
-      border:1px solid var(--gold);
-      border-radius:20px;
-      padding:.4rem 1.2rem;
-      font-size:.9rem;
-      color:var(--gold);
-      cursor:pointer;
-      transition:.4s;
-      z-index:100;
-    }
-    .social-btn:hover{background:var(--gold);color:#000}
-
-    /* قائمة تواصل متحركة */
-    .social-menu{
-      position:fixed;
-      top:-100px; /* مخفية فوق */
-      left:50%;
-      transform:translateX(-50%);
-      display:flex;
-      gap:1rem;
-      transition:.6s cubic-bezier(.68,-.55,.27,1.55);
-      z-index:101;
-    }
-    .social-menu.show{top:4.2rem}
-    .social-menu a{
-      width:44px;
-      height:44px;
-      border-radius:50%;
-      border:1px solid var(--gold);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:var(--gold);
-      text-decoration:none;
-      transition:.3s;
-    }
-    .social-menu a:hover{background:var(--gold);color:#000}
 
     /* خانات المتاجر */
     .stores{
       margin-top:12vh;
-      padding:0 1rem 4rem;
+      padding:0 1rem;
       display:flex;
       flex-direction:column;
       gap:1.2rem;
@@ -105,26 +69,51 @@
     .store img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold))}
     .store span{font-size:1.3rem;font-weight:700}
 
-    /* سهم يشير للأسفل */
-    .arrow{
-      position:fixed;
-      bottom:1.5rem;
-      left:50%;
-      transform:translateX(-50%);
-      font-size:2rem;
-      animation:bounce 2s infinite;
-    }
-    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
-
-    /* حقوق النشر أسفل */
-    footer{
-      position:fixed;
-      bottom:.5rem;
-      left:50%;
-      transform:translateX(-50%);
-      font-size:.85rem;
+    /* سهم مع Glitch غير مستقر */
+    .arrow-glitch{
+      display:block;
+      margin:4vh auto 2vh;
+      font-size:3rem;
       color:var(--gold);
-      text-shadow:0 0 4px var(--gold);
+      text-shadow:var(--glow);
+      animation:glitch .8s infinite steps(2,end);
+    }
+    @keyframes glitch{
+      0%{transform:translateX(0) skew(0deg);text-shadow:var(--glow)}
+      20%{transform:translateX(-2px) skew(-2deg);text-shadow:2px 0 #ff00ff, -2px 0 #00ffff}
+      40%{transform:translateX(2px) skew(2deg);text-shadow:-2px 0 #ff00ff, 2px 0 #00ffff}
+      60%{transform:translateX(0) skew(0deg);text-shadow:var(--glow)}
+      80%{transform:translateX(1px) skew(1deg);text-shadow:-1px 0 #ff00ff, 1px 0 #00ffff}
+      100%{transform:translateX(0) skew(0deg);text-shadow:var(--glow)}
+    }
+
+    /* زر تواصل معي + Glow */
+    .contact-btn{
+      display:block;
+      width:max-content;
+      margin:2vh auto 4vh;
+      padding:.7rem 1.5rem;
+      background:transparent;
+      border:1px solid var(--gold);
+      color:var(--gold);
+      font-size:1.1rem;
+      border-radius:25px;
+      text-decoration:none;
+      transition:.4s;
+      animation:glow 2s infinite alternate;
+    }
+    .contact-btn:hover{background:var(--gold);color:#000}
+    @keyframes glow{
+      from{box-shadow:0 0 5px var(--gold)}
+      to{box-shadow:0 0 15px var(--gold),0 0 25px var(--gold)}
+    }
+
+    /* حقوق النشر */
+    footer{
+      text-align:center;
+      font-size:.9rem;
+      color:var(--gold);
+      margin-bottom:2rem;
     }
   </style>
 </head>
@@ -133,48 +122,46 @@
   <!-- خلفية جسيمات -->
   <canvas id="particles"></canvas>
 
-  <!-- شعار Spotty -->
+  <!-- شعار Spotty المتحرك -->
   <h1 class="spotty-title">Spotty</h1>
 
-  <!-- زر التواصل + قائمة متحركة -->
-  <button class="social-btn" onclick="toggleSocial()">تواصل معنا</button>
-  <div class="social-menu" id="socialMenu">
-    <a href="https://twitter.com/yousef_scott" target="_blank" title="Twitter">T</a>
-    <a href="https://t.me/ispott" target="_blank" title="Telegram">TG</a>
-  </div>
-
   <!-- خانات المتاجر -->
-  <section class="stores" id="stores">
+  <section class="stores">
     <a class="store" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
       <img src="cydia.png" alt="Cydia"><span>Cydia</span>
     </a>
+
     <a class="store" href="sileo://source/https://espotty.github.io">
       <img src="sileo.png" alt="Sileo"><span>Sileo</span>
     </a>
+
     <a class="store" href="saily://source/https://espotty.github.io">
       <img src="saily.png" alt="Saily"><span>Saily</span>
     </a>
+
     <a class="store" href="zbra://sources/add/https://espotty.github.io">
       <img src="zebra.png" alt="Zebra"><span>Zebra</span>
     </a>
   </section>
 
-  <!-- سهم يشير للأسفل -->
-  <div class="arrow">↓</div>
+  <!-- سهم Glitch أسفل Spotty -->
+  <span class="arrow-glitch">↓</span>
+
+  <!-- زر تواصل معي -->
+  <a class="contact-btn" href="https://t.me/ispott" target="_blank">Contact Me</a>
 
   <!-- حقوق النشر -->
   <footer>© All rights reserved – Spotty Repo</footer>
 
-  <!-- سكربت الجسيمات + تبديل القائمة -->
+  <!-- سكربت الجسيمات -->
   <script>
-    /* خلفية جسيمات */
     const canvas=document.getElementById('particles');
     const ctx=canvas.getContext('2d');
     let W,H;
     function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
     resize();window.onresize=resize;
     const particles=[];
-    for(let i=0;i<150;i++)particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,dx:Math.random()*2-1,dy:Math.random()*2-1,color:`rgba(255,215,0,${Math.random()*.6+.2})`});
+    for(let i=0;i<150;i++)particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,dx:Math.random()*2-1,dy:Math.random()*2-1,color:`rgba(255,215,0,${Math.random()*.5+.2})`});
     function draw(){
       ctx.clearRect(0,0,W,H);
       particles.forEach(p=>{
@@ -186,11 +173,6 @@
       requestAnimationFrame(draw);
     }
     draw();
-
-    /* تبديل قائمة التواصل */
-    function toggleSocial(){
-      document.getElementById('socialMenu').classList.toggle('show');
-    }
   </script>
 </body>
 </html>
