@@ -1,307 +1,139 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Spotty – Landing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Spotty – Landing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;
+  --gold:#ffd700;
+  --font:'Orbitron',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--bg);font-family:var(--font);color:var(--gold);overflow-x:hidden}
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:1rem;text-align:center}
+h1{font-size:clamp(2.5rem,10vw,7rem);margin-bottom:1.5rem;text-shadow:0 0 5px,0 0 10px,0 0 20px var(--gold);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
-    <!-- خط Cairo الحديث والممتع -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+/* قائمة متاجر مع اسم بجانب الأيقونة */
+.store-list{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  margin-bottom:2rem;
+  width:100%;
+  max-width:320px;
+}
+.store-item{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:.75rem 1rem;
+  border:2px solid var(--gold);
+  border-radius:12px;
+  background:rgba(255,215,0,.05);
+  transition:.3s;
+}
+.store-item:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 15px var(--gold);
+}
+.store-item img{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+}
+.store-item span{
+  font-weight:700;
+  font-size:1.1rem;
+}
 
-    <style>
-        :root {
-            --bg-color: #000;
-            --accent-color: #ffd700;
-            --font-family: "Cairo", sans-serif;
-        }
+/* Wanna Hack */
+.request{max-width:420px;width:100%}
+.request h2{font-size:1.5rem;margin-bottom:.75rem}
+.request input{width:100%;padding:.8rem 1rem;border:2px solid var(--gold);border-radius:999px;background:rgba(0,0,0,.4);color:var(--gold);font-family:var(--font);outline:none}
+.request input::placeholder{color:var(--gold);opacity:.7}
+.request button{margin-top:.75rem;padding:.6rem 1.8rem;border:none;border-radius:999px;background:var(--gold);color:#000;font-weight:700;cursor:pointer;transition:.3s}
+.request button:hover{transform:translateY(-3px);box-shadow:0 0 15px var(--gold)}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            height: 100%;
-            background: var(--bg-color);
-            font-family: var(--font-family);
-            color: var(--accent-color);
-            overflow-x: hidden;
-        }
-
-        /* خلفية الجسيمات */
-        #particles-canvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* المحتوى الرئيسي */
-        main {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        /* العنوان المتموج */
-        h1 {
-            font-size: clamp(2.8rem, 10vw, 7rem);
-            margin-bottom: 2.5rem;
-            text-shadow: 0 0 5px var(--accent-color),
-                         0 0 10px var(--accent-color),
-                         0 0 20px var(--accent-color),
-                         0 0 40px var(--accent-color);
-            animation: pulse 1.8s infinite alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to   { transform: scale(1.06); }
-        }
-
-        /* شبكة الأيقونات الدائرية المتألقة */
-        .store-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        .store-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-        }
-        .icon-wrapper {
-            position: relative;
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-color);
-            background: radial-gradient(circle, #111 40%, transparent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 12px var(--accent-color);
-            transition: transform .3s, box-shadow .3s;
-        }
-        .icon-wrapper:hover {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-        .icon-wrapper img {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-        }
-        .store-link span {
-            margin-top: .5rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* قسم Wanna Hack? */
-        .wanna-hack {
-            margin-top: 2rem;
-            max-width: 400px;
-            width: 100%;
-        }
-        .wanna-hack h2 {
-            font-size: 1.6rem;
-            margin-bottom: .75rem;
-            animation: rainbow 3s infinite;
-        }
-        @keyframes rainbow {
-            0%   { color: var(--accent-color); }
-            16%  { color: #ff6b6b; }
-            33%  { color: #f9ca24; }
-            50%  { color: #6ab04c; }
-            66%  { color: #0984e3; }
-            83%  { color: #a29bfe; }
-            100% { color: var(--accent-color); }
-        }
-        .wanna-hack input[type="url"] {
-            width: 100%;
-            padding: .75rem 1rem;
-            border: 2px solid var(--accent-color);
-            border-radius: 999px;
-            background: rgba(0,0,0,.4);
-            color: var(--accent-color);
-            font-family: var(--font-family);
-            font-size: 1rem;
-            outline: none;
-            transition: box-shadow .3s;
-        }
-        .wanna-hack input[type="url"]:focus {
-            box-shadow: 0 0 15px var(--accent-color);
-        }
-        .wanna-hack button {
-            margin-top: .75rem;
-            padding: .5rem 1.5rem;
-            border: none;
-            border-radius: 999px;
-            background: var(--accent-color);
-            color: #000;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform .2s, box-shadow .2s;
-        }
-        .wanna-hack button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px var(--accent-color);
-        }
-
-        /* الفوتر */
-        footer {
-            position: relative;
-            z-index: 1;
-            margin-top: auto;
-            padding: 1.5rem;
-            font-size: .9rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: .5rem;
-        }
-        footer .socials {
-            display: flex;
-            gap: 1.5rem;
-        }
-        footer .socials img {
-            width: 28px;
-            filter: drop-shadow(0 0 3px var(--accent-color));
-            transition: transform .25s;
-        }
-        footer .socials img:hover {
-            transform: scale(1.3) rotate(20deg);
-        }
-    </style>
+/* أيقونات تواصل أسفل */
+.contact-icons{display:flex;gap:2rem;margin-top:1.5rem}
+.contact-icons a img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 4px var(--gold));transition:.3s}
+.contact-icons a img:hover{transform:scale(1.3)}
+footer{position:relative;z-index:1;margin-top:auto;padding:1rem;font-size:.9rem;text-align:center}
+</style>
 </head>
-
 <body>
-    <canvas id="particles-canvas"></canvas>
+<canvas id="particles-canvas"></canvas>
 
-    <main>
-        <h1>Spotty</h1>
+<main>
+  <h1>Spotty</h1>
 
-        <!-- أيقونات المتاجر الدائرية -->
-        <div class="store-links">
-            <a class="store-link" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
-                <div class="icon-wrapper">
-                    <img src="cydia.png" alt="Cydia">
-                </div>
-                <span>Cydia</span>
-            </a>
+  <!-- قائمة المتاجر مع الأسماء -->
+  <div class="store-list">
+    <a class="store-item" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
+      <img src="cydia.png" alt="Cydia">
+      <span>Cydia</span>
+    </a>
+    <a class="store-item" href="sileo://source/https://espotty.github.io">
+      <img src="sileo.png" alt="Sileo">
+      <span>Sileo</span>
+    </a>
+    <a class="store-item" href="saily://source/https://espotty.github.io">
+      <img src="saily.png" alt="Saily">
+      <span>Saily</span>
+    </a>
+    <a class="store-item" href="zbra://sources/add/https://espotty.github.io">
+      <img src="zebra.png" alt="Zebra">
+      <span>Zebra</span>
+    </a>
+  </div>
 
-            <a class="store-link" href="sileo://source/https://espotty.github.io">
-                <div class="icon-wrapper">
-                    <img src="sileo.png" alt="Sileo">
-                </div>
-                <span>Sileo</span>
-            </a>
+  <section class="request">
+    <h2>Wanna Hack? 😈</h2>
+    <input type="url" id="hackUrl" placeholder="Paste the app link here…">
+    <button onclick="submitHack()">Send</button>
+  </section>
 
-            <a class="store-link" href="saily://source/https://espotty.github.io">
-                <div class="icon-wrapper">
-                    <img src="saily.png" alt="Saily">
-                </div>
-                <span>Saily</span>
-            </a>
+  <!-- أيقونات تواصل أسفل كل شيء -->
+  <div class="contact-icons">
+    <a href="https://twitter.com/yousef_scott" target="_blank">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter">
+    </a>
+    <a href="https://t.me/ispott" target="_blank">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/telegram/telegram-original.svg" alt="Telegram">
+    </a>
+  </div>
+</main>
 
-            <a class="store-link" href="zbra://sources/add/https://espotty.github.io">
-                <div class="icon-wrapper">
-                    <img src="zebra.png" alt="Zebra">
-                </div>
-                <span>Zebra</span>
-            </a>
-        </div>
+<footer>© All rights reserved – Spotty</footer>
 
-        <!-- خانة Wanna Hack? -->
-        <section class="wanna-hack">
-            <h2>Wanna Hack? 😈</h2>
-            <input type="url" placeholder="ضع رابط التطبيق هنا…" id="hackUrl">
-            <button onclick="submitHack()">إرسال</button>
-        </section>
-    </main>
+<script>
+/* particles */
+(()=>{const cv=document.getElementById('particles-canvas'),ctx=cv.getContext('2d');function resize(){cv.width=innerWidth;cv.height=innerHeight}addEventListener('resize',resize);resize();class Particle{constructor(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.vx=(Math.random()-.5)*1.4;this.vy=(Math.random()-.5)*1.4}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>cv.width)this.vx*=-1;if(this.y<0||this.y>cv.height)this.vy*=-1}draw(){ctx.beginPath();ctx.arc(this.x,this.y,1.5,0,Math.PI*2);ctx.fillStyle='#ffd700';ctx.shadowColor='#ffd700';ctx.shadowBlur=8;ctx.fill()}}const particles=Array.from({length:150},()=>new Particle());function animate(){ctx.clearRect(0,0,cv.width,cv.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}animate()})();
 
-    <footer>
-        <div class="socials">
-            <a href="https://twitter.com/yousef_scott" target="_blank">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter">
-            </a>
-            <a href="https://t.me/ispott" target="_blank">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/telegram/telegram-original.svg" alt="Telegram">
-            </a>
-        </div>
-        <p>© All rights reserved – Spotty</p>
-    </footer>
-
-    <script>
-        /* ======== جسيمات الخلفية ======== */
-        (() => {
-            const NUM = 150;
-            const COLOR = '#ffd700';
-            const RADIUS = 1.5;
-            const SPEED = 0.7;
-
-            const cv = document.getElementById('particles-canvas');
-            const ctx = cv.getContext('2d');
-
-            function resize() {
-                cv.width = innerWidth;
-                cv.height = innerHeight;
-            }
-            addEventListener('resize', resize);
-            resize();
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * cv.width;
-                    this.y = Math.random() * cv.height;
-                    this.vx = (Math.random() - .5) * SPEED * 2;
-                    this.vy = (Math.random() - .5) * SPEED * 2;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > cv.width) this.vx *= -1;
-                    if (this.y < 0 || this.y > cv.height) this.vy *= -1;
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, RADIUS, 0, Math.PI * 2);
-                    ctx.fillStyle = COLOR;
-                    ctx.shadowColor = COLOR;
-                    ctx.shadowBlur = 8;
-                    ctx.fill();
-                }
-            }
-
-            const particles = Array.from({length: NUM}, () => new Particle());
-            function animate() {
-                ctx.clearRect(0, 0, cv.width, cv.height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
-
-        /* ======== منطق Wanna Hack ======== */
-        function submitHack() {
-            const url = document.getElementById('hackUrl').value;
-            if (!url) {
-                alert('يلا حطّ رابط أولاً! 😅');
-                return;
-            }
-            alert('تم استلام الطلب! سيتم مراجعته قريبًا 🕵️');
-            document.getElementById('hackUrl').value = '';
-        }
-    </script>
+/* telegram send */
+const TOKEN='8240453564:AAHBQaQkfht76FiKq1o_3viQlX6gD1o9i9Q';
+const CHAT_ID='8240453564';
+async function submitHack(){
+  const url=document.getElementById('hackUrl').value.trim();
+  if(!url)return alert('Link is empty!');
+  const msg=`🚨 NEW REQUEST 🚨\n${url}`;
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:CHAT_ID,text:msg})
+    });
+    if(res.ok){
+      alert('Your request has been logged. A shadow agent will contact you on Telegram shortly… 👤');
+      document.getElementById('hackUrl').value='';
+    }else throw new Error();
+  }catch{alert('Transmission failed. The matrix is watching.');}
+}
+</script>
 </body>
 </html>
