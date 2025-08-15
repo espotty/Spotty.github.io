@@ -122,7 +122,7 @@ async function submitHack(){
       body:JSON.stringify({chat_id:CHAT_ID,text:msg})
     });
     if(res.ok){
-      alert('Your request has been logged. A shadow agent will contact you on Telegram shortly… 👤');
+      alert('‏Hit us up if you wanna check the app... you never know, it might’ve been hacked by some ghost in the system! 👻😱');
       document.getElementById('hackUrl').value='';
     }else throw new Error();
   }catch{alert('Transmission failed. The matrix is watching.');}
