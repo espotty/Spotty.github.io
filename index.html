@@ -1,173 +1,176 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>Spotty</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0a0a0a;
-      --gold:#ffd700;
-      --glow:0 0 8px var(--gold),0 0 20px var(--gold);
-      --font:'Tajawal',sans-serif;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{min-height:100vh;font-family:var(--font);background:var(--bg);color:#fff}
-    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+  <meta charset="UTF-8">
+  <title>Spotty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0a0a;
+      --gold:#ffd700;
+      --glow:0 0 8px var(--gold),0 0 20px var(--gold);
+      --font:'Tajawal',sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    /* تم إزالة الخلفية السوداء من الـ body عشان الـ particles تبان */
+    html,body{min-height:100vh;font-family:var(--font);color:#fff}
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
 
-    /* شعار Spotty + أنيميشن خفيف */
-    .hero{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:12vh 1rem 5vh;
-    }
-    .spotty-title{
-      font-size:3rem;
-      font-weight:900;
-      color:var(--gold);
-      text-shadow:var(--glow);
-      animation:pulse 2.5s infinite ease-in-out;
-    }
-    @keyframes pulse{
-      0%,100%{transform:scale(1)}
-      50%{transform:scale(1.05)}
-    }
+    /* شعار Spotty + أنيميشن خفيف */
+    .hero{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:12vh 1rem 5vh;
+    }
+    .spotty-title{
+      font-size:3rem;
+      font-weight:900;
+      color:var(--gold);
+      text-shadow:var(--glow);
+      animation:pulse 2.5s infinite ease-in-out;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.05)}
+    }
 
-    /* خانات المتاجر */
-    .stores{
-      display:flex;
-      flex-direction:column;
-      gap:1.2rem;
-      max-width:480px;
-      margin:0 auto 6rem;
-      padding:0 1rem;
-    }
-    .store{
-      display:flex;
-      align-items:center;
-      gap:1rem;
-      padding:1rem;
-      background:rgba(255,215,0,.06);
-      border:1px solid var(--gold);
-      border-radius:18px;
-      transition:.4s;
-    }
-    .store:hover{background:var(--gold);color:#000}
-    .store img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold))}
-    .store span{font-size:1.3rem;font-weight:700}
+    /* خانات المتاجر */
+    .stores{
+      display:flex;
+      flex-direction:column;
+      gap:1.2rem;
+      max-width:480px;
+      margin:0 auto 6rem;
+      padding:0 1rem;
+    }
+    .store{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      padding:1rem;
+      /* تم تعديل الخلفية لتكون شفافة */
+      background:rgba(255,215,0,0.06);
+      border:1px solid var(--gold);
+      border-radius:18px;
+      transition:.4s;
+    }
+    .store:hover{background:var(--gold);color:#000}
+    .store img{width:64px;height:64px;filter:drop-shadow(0 0 4px var(--gold))}
+    .store span{font-size:1.3rem;font-weight:700}
 
-    /* شريط تواصل ثابت أسفل */
-    .contact-bar{
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      background:rgba(0,0,0,.8);
-      border-top:1px solid var(--gold);
-      backdrop-filter:blur(8px);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:.8rem 1rem;
-      z-index:100;
-    }
-    .rights{
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      font-size:.9rem;
-      color:var(--gold);
-    }
-    .rights img.logo-small{height:30px;width:auto}
-    .contact-icons{
-      display:flex;
-      gap:1rem;
-    }
-    .contact-icons a{
-      width:36px;height:36px;
-      border-radius:50%;
-      border:1px solid var(--gold);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--gold);
-      text-decoration:none;
-      font-weight:700;
-      transition:.3s;
-    }
-    .contact-icons a:hover{background:var(--gold);color:#000}
-  </style>
+    /* شريط تواصل ثابت أسفل */
+    .contact-bar{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      /* تم تعديل الخلفية لتكون شفافة مع تأثير blur */
+      background:rgba(0,0,0,.8);
+      border-top:1px solid var(--gold);
+      backdrop-filter:blur(8px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:.8rem 1rem;
+      z-index:100;
+    }
+    .rights{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      font-size:.9rem;
+      color:var(--gold);
+    }
+    .rights img.logo-small{height:30px;width:auto}
+    .contact-icons{
+      display:flex;
+      gap:1rem;
+    }
+    .contact-icons a{
+      width:36px;height:36px;
+      border-radius:50%;
+      border:1px solid var(--gold);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      text-decoration:none;
+      font-weight:700;
+      transition:.3s;
+    }
+    .contact-icons a:hover{background:var(--gold);color:#000}
+  </style>
 </head>
 
 <body>
-  <canvas id="particles"></canvas>
+  <canvas id="particles"></canvas>
 
-  <section class="hero">
-    <h1 class="spotty-title">Spotty</h1>
-  </section>
+  <section class="hero">
+    <h1 class="spotty-title">Spotty</h1>
+  </section>
 
-  <section class="stores">
-    <a class="store" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io">
-      <img src="cydia.png" alt="Cydia"><span>Cydia</span>
-    </a>
-    <a class="store" href="sileo://source/https://espotty.github.io">
-      <img src="sileo.png" alt="Sileo"><span>Sileo</span>
-    </a>
-    <a class="store" href="saily://source/https://espotty.github.io">
-      <img src="saily.png" alt="Saily"><span>Saily</span>
-    </a>
-    <a class="store" href="zbra://sources/add/https://espotty.github.io">
-      <img src="zebra.png" alt="Zebra"><span>Zebra</span>
-    </a>
-  </section>
+  <section class="stores">
+    <a class="store" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://espotty.github.io" target="_blank">
+      <img src="cydia.png" alt="Cydia"><span>Cydia</span>
+    </a>
+    <a class="store" href="sileo://source/https://espotty.github.io" target="_blank">
+      <img src="sileo.png" alt="Sileo"><span>Sileo</span>
+    </a>
+    <a class="store" href="saily://source/https://espotty.github.io" target="_blank">
+      <img src="saily.png" alt="Saily"><span>Saily</span>
+    </a>
+    <a class="store" href="zbra://sources/add/https://espotty.github.io" target="_blank">
+      <img src="zebra.png" alt="Zebra"><span>Zebra</span>
+    </a>
+  </section>
 
-  <div class="contact-bar">
-    <div class="rights">
-      © All rights reserved – Spotty Repo
-      <img class="logo-small" src="logo-small.png" alt="Logo">
-    </div>
-    <div class="contact-icons">
-      <a href="https://twitter.com/yousef_scott" title="Twitter">T</a>
-      <a href="https://t.me/ispott" title="Telegram">TG</a>
-    </div>
-  </div>
+  <div class="contact-bar">
+    <div class="rights">
+      © All rights reserved – Spotty Repo
+      <img class="logo-small" src="logo-small.png" alt="Logo">
+    </div>
+    <div class="contact-icons">
+      <a href="https://twitter.com/yousef_scott" title="Twitter" target="_blank">T</a>
+      <a href="https://t.me/ispott" title="Telegram" target="_blank">TG</a>
+    </div>
+  </div>
 
-  <script>
+  <script>
 const canvas=document.getElementById('particles');
 const ctx=canvas.getContext('2d');
 let W,H;
 function resize(){
-  W=canvas.width=innerWidth;
-  H=canvas.height=document.documentElement.scrollHeight; // <== التعديل
+  W=canvas.width=innerWidth;
+  H=canvas.height=document.documentElement.scrollHeight;
 }
 resize();window.onresize=resize;
 
 const particles=Array.from({length:200},()=>({
-  x:Math.random()*W,
-  y:Math.random()*H,
-  r:Math.random()*2+1,
-  dx:Math.random()*2-1,
-  dy:Math.random()*2-1,
-  color:`rgba(255,215,0,${Math.random()*.5+.2})`
+  x:Math.random()*W,
+  y:Math.random()*H,
+  r:Math.random()*2+1,
+  dx:Math.random()*2-1,
+  dy:Math.random()*2-1,
+  color:`rgba(255,215,0,${Math.random()*.5+.2})`
 }));
 
 function draw(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.color;
-    ctx.fill();
-    p.x+=p.dx;
-    p.y+=p.dy;
-    if(p.x<0||p.x>W)p.dx*=-1;
-    if(p.y<0||p.y>H)p.dy*=-1;
-  });
-  requestAnimationFrame(draw);
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+    p.x+=p.dx;
+    p.y+=p.dy;
+    if(p.x<0||p.x>W)p.dx*=-1;
+    if(p.y<0||p.y>H)p.dy*=-1;
+  });
+  requestAnimationFrame(draw);
 }
 draw();
 </script>
