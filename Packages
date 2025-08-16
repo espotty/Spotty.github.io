@@ -1,0 +1,7 @@
+Package: SpottyTweak
+Version: 1.0
+Architecture: iphoneos-arm
+Maintainer: Spotty
+Filename: ./debs/SpottyTweak.deb
+Size: 123456
+Description: Real tweak for window management
