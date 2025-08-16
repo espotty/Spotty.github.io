@@ -5,4 +5,10 @@ Version: 1.0
 Codename: ios
 Architectures: iphoneos-arm
 Components: main
-Description: 
+Description: Welcome to Spotty – the only repo that asks “Wanna Hack?” before it hacks you back.
+Inside this tiny package lurks:
+Dark-matter stars that follow your cursor like nosy neighbors.
+Golden halos around icons—touch them and your device gains +10 Cydia points.
+A Telegram bot that answers at 3 AM with “👀” when you request TikTok++.
+A minified source so obfuscated even the NSA needs a coffee break.
+Install at your own risk; we’re not liable if your SpringBoard starts speaking in binary.
